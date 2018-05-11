@@ -1,0 +1,182 @@
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Proyecto Cliente</title>
+
+<!-- Bootstrap -->
+<link href="../../webapp/css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+<link href="../../webapp/css/bootstrap.min.css"
+	th:href="@{css/font-awesome.min.css}" rel="stylesheet" />
+<link href="../../webapp/css/bootstrap.min.css"
+	th:href="@{css/bootstrap-social.css}" rel="stylesheet" />
+<link href="../../webapp/css/sticky-footer-navbar.css"
+	th:href="@{css/sticky-footer-navbar.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+	<div>
+		<nav id="bar" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Navegacion</span>
+					</button>
+					<a class="navbar-brand" href="#" th:href="@{/}">Bienvenido, <span
+						th:text="${twitterProfile.name}"></span>!
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Desercion 2015 "Programas vs Estrato"</h1>
+			
+			<div>
+				<iframe width="1000px" title="Desercion 2015 Programas vs Estrato"
+					height="800px"
+					src="https://www.datos.gov.co/w/k2bq-mm8v/dneh-mcp2?cur=Xo29y5rwKzb;from=root">
+					<a
+						href="https://www.datos.gov.co/Educaci-n/Desercion-2015-Programas-vs-Estrato-/k2bq-mm8v"
+						title="Desercion 2015 Programas vs Estrato" target="_blank">Desercion 2015 Programas vs Estrato</a>
+				</iframe>
+			</div>
+			
+			<div class="container">
+				<div class="jumbotron">
+					<form action="consultaForm" id="form" method="POST">
+						Nombre Facultad: <input type="text" id="nombreFacultad" name="nombreFacultad" style="margin-left: 13px;"/>
+						<br/><br/>
+						Nombre Programa: <input type="text" id="nombrePrograma" name="nombrePrograma" style="margin-left: 6px;"/>
+						<br/><br/>
+						Sede: <input type="text" id="sede" name="sede" style="margin-left: 87px;"/>
+						<br/><br/>
+						Sexo: <select name="sexo" id="sexo" style="margin-left: 86px ; padding-left: 58px">
+								  <option value="">SELECCIONE</option>
+								  <option value="F">FEMENINO</option>
+								  <option value="M">MASCULINO</option>
+								</select>  
+						<br/><br/>
+						<div class="container" align="center">
+							<input type="submit" value="Consultar" /> <br />
+						</div>
+						<br />
+						<table class="table" id="resultadoConsulta">
+							<thead class="thead-light">
+								<tr align="center">
+									<th scope="col">Periodo</th>
+									<th scope="col">Facultad</th>
+									<th scope="col">Programa</th>
+									<th scope="col">Jornada</th>
+									<th scope="col">Modalidad</th>
+									<th scope="col">Sede</th>
+									<th scope="col">Sexo</th>
+									<th scope="col">Estrato</th>
+								</tr>
+							</thead>
+							<tbody th:each="resultado:${resultadoConsulta}">
+								<tr align="center">
+									<td th:text="${resultado.peperiodo_peano}"></td>
+									<td th:text="${resultado.nombrefacultad}"></td>
+									<td th:text="${resultado.nombreprograma}"></td>
+									<td th:text="${resultado.jornada}"></td>
+									<td th:text="${resultado.modalidad}"></td>
+									<td th:text="${resultado.nombresede}"></td>
+									<td th:text="${resultado.sexo}"></td>
+									<td th:text="${resultado.estrato}"></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</form>
+				</div>
+			</div>
+			
+			<div class="container" id="graficoDesercion" style="width: 1000px; height: 800px" align="center"></div>
+
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAhgi7cZi_ZIBOLTthoejaVpIvJJuQqj8"></script>
+	
+
+
+	<div th:replace="footers/footer :: #footer"></div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+<script>
+	    var tableReg = document.getElementById('resultadoConsulta');
+		var cellsOfRow="";
+		var existe = 0;
+		
+		if(tableReg.rows.length > 1){
+			existe =1;
+		}
+		
+		if(existe ==1){
+			google.load("visualization", "1", {packages:["corechart"]});
+		    google.setOnLoadCallback(dibujarGrafico);
+		    function dibujarGrafico() {
+		    	
+		    	var data = new google.visualization.DataTable();
+		    	data.addColumn('string', 'Programa');
+		    	data.addColumn('number', 'Estrato');
+                        
+                        //En este for recorremos la tabla
+		    	for (var i = tableReg.rows.length-1; i > 0; i--) {
+                                cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+                                
+                                
+                                var estrato =0;
+                                if(cellsOfRow[7].innerHTML.toLowerCase() != ""){
+                                        estrato = parseInt(cellsOfRow[7].innerHTML.toLowerCase());
+                                }
+                                //
+                                data.addRows([[cellsOfRow[2].innerHTML.toLowerCase(), estrato]]);
+                                existe =1;
+                        }
+		    	
+			     var options = {
+			       title: 'Desercion 2015 Programas vs Estrato'
+			     }
+			     // Dibujar el gráfico
+                             /*
+                              * - LineChart
+                                - ColumnChart
+                                - PieChart
+                                - AreaChart
+                              */
+			     new google.visualization.PieChart( 
+			       document.getElementById('graficoDesercion')
+			     ).draw(data, options);
+		   }
+		}
+ </script> 
+</body>
+</html>
+
+<script>
+	
+</script>

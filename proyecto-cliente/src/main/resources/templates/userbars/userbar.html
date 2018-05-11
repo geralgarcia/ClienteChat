@@ -1,0 +1,29 @@
+<html>
+  <body>
+    <div id="content">
+      
+    </div>
+   
+    <nav id="bar" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Navegacion</span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}">Cliente Servidor</a>
+          </div>
+          <div th:if="${twitterProfile}" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+          </div>
+          
+          <div th:unless="${twitterProfile}"  class="navbar-collapse collapse">
+             <ul class="nav navbar-nav navbar-right">
+              <li><a href="./login.html" th:href="@{/signup}">Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+  </body>
+</html>

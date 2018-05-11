@@ -1,0 +1,31 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Login con Twitter</title>
+
+    <!-- Bootstrap -->
+    <link href="../../webapp/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../../webapp/css/font-awesome.min.css" th:href="@{css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../../webapp/css/bootstrap-social.css" th:href="@{css/bootstrap-social.css}" rel="stylesheet"/>
+    <link href="../../webapp/css/sticky-footer-navbar.css" th:href="@{css/sticky-footer-navbar.css}" rel="stylesheet"/>
+
+  </head>
+  <body>
+  	<div th:replace="userbars/userbar :: #bar"></div>
+    <div class="container"><div class="jumbotron"><h1>Bienvenido !</h1>
+    
+    <!-- TWITTER SIGNIN -->
+			<form id="tw_signin" th:action="@{/connect/twitter}" method="POST">
+				<button class="btn btn-social btn-twitter" type="submit"><i class="fa fa-twitter"></i> Conectar con Twitter</button>
+				
+			</form>
+			
+    </div></div>
+	<div th:replace="footers/footer :: #footer"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
